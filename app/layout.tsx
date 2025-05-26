@@ -9,8 +9,8 @@ const monaSans = Mona_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "PrepWise",
-  description: "An AI-Powered plateform for mock interview.",
+  title: "BookSnap – Snap the Essence of Any Book in Seconds",
+  description: "BookSnap is a smart, AI-powered summarizer that lets you instantly generate summaries of any book in your preferred format—extractive, abstractive, chapter-wise, or bullet points. Just type the book name, and get concise insights in English, Hindi, or Marathi. Powered by cutting-edge AI, BookSnap makes deep reading fast, fun, and multilingual—for everyone.",
 };
 
 export default function RootLayout({
