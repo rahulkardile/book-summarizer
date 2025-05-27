@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark"> 
       <body
-        className={`${monaSans.className} antialiased pattern`}
+        className={`${monaSans.className} antialiased pattern min-h-screen bg-gradient-to-r from-[#5f00ba] via-[#d2008f] to-[#6c00ff]`}
       >
         {children}
         <Toaster />

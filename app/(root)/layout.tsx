@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 
 const layout = ({ children }: { children: ReactNode }) => {
     return (
-        <div className='bg-blue-950'>
+        <div className=''>
             <nav className='bg-gray-800 text-gray-400 font-medium text-sm flex justify-between items-center px-7 w-[60%] mt-3.5 mx-auto py-2 rounded-2xl'>
 
                 <Link className='hover:text-gray-300 hover:font-bold duration-500' href={"/"}>BookSnap</Link>
