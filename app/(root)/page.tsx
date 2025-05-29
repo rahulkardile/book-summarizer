@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Page = () => {
@@ -12,9 +13,9 @@ const Page = () => {
         <p className="text-lg md:text-xl text-gray-300">
           Get intelligent book summaries in seconds — simply enter a book name, choose your preferred summary style (extractive, abstractive, chapter-wise, or bullet points), select your language (English, Hindi, or Marathi), and let AI unlock deep insights tailored just for you.
         </p>
-        <button className="bg-yellow-300 hover:bg-yellow-400 text-black font-semibold py-3 px-6 rounded w-fit mx-auto md:mx-0 transition">
+        <Link href={"/chat"} className="bg-yellow-300 hover:bg-yellow-400 text-black font-semibold py-3 px-6 rounded w-fit mx-auto md:mx-0 transition">
           Summarize Now
-        </button>
+        </Link>
       </div>
 
       <div className="relative flex justify-center items-end">
