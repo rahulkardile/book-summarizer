@@ -1,4 +1,4 @@
-export async function POST(req) {
+export async function POST(req: any) {
   const { bookTitle, summaryFormat, language } = await req.json();
 
   const promptTemplate = `

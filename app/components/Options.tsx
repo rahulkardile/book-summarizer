@@ -14,21 +14,17 @@ const Options: React.FC<OptionsProps> = ({
   const paddingX = typeof padding === 'number' ? `px-${padding}` : 'px-4'
 
   return (
-    <div className="flex flex-col items-start w-full">
-      <label htmlFor={id} className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-        {label}
-      </label>
-
+    <div className="flex flex-col items-start w-full text-black">
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={`
           w-full py-2 ${paddingX}
-          bg-white text-gray-900 dark:bg-gray-800 dark:text-white
+          bg-white text-gray-900 text-bl
           rounded-lg border border-gray-300 dark:border-gray-600
           focus:outline-none focus:ring-2 focus:ring-indigo-500
-          shadow-sm text-sm transition duration-200
+          shadow-sm text-xs transition duration-200
         `}
       >
         <option value="" disabled>
