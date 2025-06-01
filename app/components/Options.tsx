@@ -11,32 +11,31 @@ const Options: React.FC<OptionsProps> = ({
   value,
   onChange,
 }) => {
+  const paddingX = typeof padding === 'number' ? `px-${padding}` : 'px-4'
+
   return (
     <div className="flex flex-col items-start w-full">
-      <label htmlFor={id} className="mb-1 text-sm font-semibold mx-3 text-white">
+      <label htmlFor={id} className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
         {label}
       </label>
+
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={`
-          w-full px-${padding} py-2
-          bg-white/10 text-white
-          rounded-lg border border-white/30
-          focus:outline-none focus:ring-2 focus:ring-white/80
-          backdrop-blur-md shadow-md text-sm transition duration-200
+          w-full py-2 ${paddingX}
+          bg-white text-gray-900 dark:bg-gray-800 dark:text-white
+          rounded-lg border border-gray-300 dark:border-gray-600
+          focus:outline-none focus:ring-2 focus:ring-indigo-500
+          shadow-sm text-sm transition duration-200
         `}
       >
-        <option value="" className="text-gray-300">
+        <option value="" disabled>
           Select {label}
         </option>
         {options.map((opt) => (
-          <option
-            key={opt.value}
-            value={opt.value}
-            className="text-black"
-          >
+          <option key={opt.value} value={opt.value}>
             {opt.label}
           </option>
         ))}
