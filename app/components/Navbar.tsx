@@ -14,7 +14,7 @@ export default function Navbar() {
       <Link className='hover:text-black rounded hover:bg-white p-1 duration-500' href={"/"}>New Book's</Link>
       <Link className='hover:text-black rounded hover:bg-white p-1 duration-500' href={"/"}>New Chat</Link>
       <Link className='hover:text-black rounded hover:bg-white p-1 duration-500' href={"/"}>Contact</Link>
-      <Link className='text-gray-200 border border-white p-1.5 px-4 rounded' href={"/"}>Sign-In</Link>
+      <Link className='text-gray-200 border border-white p-1.5 px-4 rounded' href={"/login"}>Sign-In</Link>
       <Link className='bg-yellow-200 p-1.5 rounded text-black' href={"/chat"}>Get-Started</Link>
     </nav>
   );
