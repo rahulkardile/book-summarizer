@@ -5,45 +5,46 @@ import Options from '@/app/components/Options'
 import { languageOptions, summarizationOptions } from '@/utils/Contants'
 import Link from 'next/link'
 import { Sun, Moon } from 'lucide-react'
+import { Typewriter } from 'react-simple-typewriter'
 
 const Page: React.FC = () => {
   const [format, setFormat] = useState<string>('')
   const [language, setLanguage] = useState<string>('')
   const [bookTitle, setBookTitle] = useState<string>('') // NEW
-  const [summary, setSummary] = useState<string>('') // NEW
+  const [summaries, setSummaries] = useState<string[]>([]) // ⬅️ updated
   const [loading, setLoading] = useState<boolean>(false)
   const [darkMode, setDarkMode] = useState<boolean>(false)
 
-  // 📡 API Call Handler
-  const handleSubmit = async () => {
-    if (!bookTitle || !format || !language) {
-      alert('Please fill all fields.')
-      return
-    }
-
-    setLoading(true)
-    try {
-      const res = await fetch('/api/ai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          bookTitle,
-          summaryFormat: format,
-          language
-        })
-      })
-
-      const data = await res.json()
-      setSummary(data?.summary || 'No summary returned.')
-    } catch (err) {
-      console.error('Error fetching summary:', err)
-      setSummary('Something went wrong.')
-    } finally {
-      setLoading(false)
-    }
+const handleSubmit = async () => {
+  if (!bookTitle || !format || !language) {
+    alert('Please fill all fields.')
+    return
   }
+
+  setLoading(true)
+  try {
+    const res = await fetch('/api/ai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        bookTitle,
+        summaryFormat: format,
+        language
+      })
+    })
+
+    const data = await res.json()
+    setSummaries((prev) => [...prev, data?.result || 'No summary returned.'])
+  } catch (err) {
+    console.error('Error fetching summary:', err)
+    setSummaries((prev) => [...prev, 'Something went wrong.'])
+  } finally {
+    setLoading(false)
+  }
+}
+
 
   return (
     <section className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'} h-screen flex transition-colors duration-300 font-medium`}>
@@ -63,7 +64,7 @@ const Page: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="w-[60%] flex flex-col items-center pt-12 relative bg-transparent">
+      <main className="w-[60%] flex flex-col items-center pt-12 relative bg-transparent overflow-y-auto">
         <button
           onClick={() => setDarkMode(!darkMode)}
           className="absolute top-6 right-6 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white hover:scale-105 transition"
@@ -71,6 +72,26 @@ const Page: React.FC = () => {
         >
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
+
+        {summaries.length > 0 && (
+        <div className="mt-6 w-11/12 md:w-3/4 lg:w-11/12 max-h-[400px] overflow-y-auto space-y-6 p-4 border rounded-xl bg-white border-gray-300 text-sm">
+          {summaries.map((summary, idx) => (
+            <div key={idx} className="p-3 rounded-lg bg-gray-50  whitespace-pre-wrap">
+              <Typewriter
+                key={summary}
+                words={[summary]}
+                loop={1}
+                cursor
+                cursorStyle="_"
+                typeSpeed={20}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
 
         <section className={`${darkMode ? 'bg-black text-xs text-white' : 'bg-white text-xs text-gray-900'} backdrop-blur-md w-11/12 md:w-3/4 lg:w-2/3 absolute bottom-12 p-6 rounded-xl space-y-6 border border-gray-300 `}>
           <input
@@ -108,13 +129,6 @@ const Page: React.FC = () => {
           >
             {loading ? 'Summarizing...' : 'Generate Summary'}
           </button>
-
-          {summary && (
-            <div className="mt-4 p-4 bg-white text-black rounded-md">
-              <h3 className="font-semibold mb-2">Summary:</h3>
-              <pre className="whitespace-pre-wrap">{summary}</pre>
-            </div>
-          )}
         </section>
       </main>
 

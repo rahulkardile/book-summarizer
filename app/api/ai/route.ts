@@ -34,8 +34,12 @@ export async function POST(req: any) {
     });
 
     const data = await response.json();
-    return Response.json(data);
+    return Response.json({
+      result: data.candidates[0].content.parts[0].text,
+      type: summaryFormat
+    });
   } catch (error) {
+    console.log(error);
     return Response.json({ error: 'Failed to fetch from Gemini API' }, { status: 500 });
   }
 }
