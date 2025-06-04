@@ -12,3 +12,5 @@ export interface OptionsProps {
     value?: string
     onChange: (value: string) => void
 }
+
+export type SummaryItem = { bookTitle: string; content: string, type: string }

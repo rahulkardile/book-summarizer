@@ -1,3 +1,4 @@
+
 export async function POST(req: any) {
   const { bookTitle, summaryFormat, language } = await req.json();
 
@@ -35,7 +36,8 @@ export async function POST(req: any) {
 
     const data = await response.json();
     return Response.json({
-      result: data.candidates[0].content.parts[0].text,
+      bookTitle,
+      content: data.candidates[0].content.parts[0].text,
       type: summaryFormat
     });
   } catch (error) {
